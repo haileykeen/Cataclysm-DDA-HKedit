@@ -1001,9 +1001,20 @@ ret_val<edible_rating> Character::will_eat( const item &food, bool interactive )
         add_consequence( _( "You still feel nauseous and will probably puke it all up again." ), NAUSEA );
     }
 
-    if( ( allergy_type( food ) != morale_type::NULL_ID() ) || ( carnivore &&
-            food.has_flag( flag_ALLERGEN_JUNK ) &&
-            !food.has_flag( flag_CARNIVORE_OK ) ) ) {
+    if(allergy_type( food ) != morale_type::NULL_ID()) {
+		if (food.has_flag( flag_ALLERGEN_MILK ) {
+			if ((food.component.any != comestible_soy_milk || food.component.any != comestible_almond_milk)
+			|| (food.component.any == comestible.has_flag( flag_ALLERGEN_MILK ) ) ) {		
+				add_consequence( _( "Your stomach won't be happy (allergy)." ), ALLERGY );	
+			}
+		}
+		else {
+			add_consequence( _( "Your stomach won't be happy (allergy)." ), ALLERGY );
+		}		
+	}
+	
+	if (carnivore && food.has_flag( flag_ALLERGEN_JUNK ) 
+	            && !food.has_flag( flag_CARNIVORE_OK ) ) {
         add_consequence( _( "Your stomach won't be happy (allergy)." ), ALLERGY );
     }
 
